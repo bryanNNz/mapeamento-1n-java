@@ -14,13 +14,15 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "TB_PESSOA", schema = "DB")
+@Table(name = "TB_PESSOA")
 public class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
