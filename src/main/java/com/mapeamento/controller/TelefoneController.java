@@ -42,7 +42,7 @@ public class TelefoneController {
 		if(telefone != null)
 			return ResponseEntity.ok().body(telefone);
 		
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(
@@ -55,6 +55,6 @@ public class TelefoneController {
 		if(telefones != null && !telefones.isEmpty())
 			return ResponseEntity.ok().body(telefones);
 		
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.noContent().build();
 	}
 }

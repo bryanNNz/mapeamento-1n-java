@@ -43,6 +43,6 @@ public class PessoaController {
 		if(pessoa != null)
 			return ResponseEntity.ok().body(pessoa);
 		
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.noContent().build();
 	}
 }

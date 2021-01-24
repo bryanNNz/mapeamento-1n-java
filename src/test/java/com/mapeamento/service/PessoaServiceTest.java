@@ -39,6 +39,7 @@ public class PessoaServiceTest {
 				PessoaBuilder.builder().id(1L).nome("MARIA").get(),
 				PessoaBuilder.builder().id(2L).nome("JOAO").get(),
 				PessoaBuilder.builder().id(3L).nome("JOSE").get());
+		
 		doReturn(pessoas)
 			.when(pessoaRepository)
 			.findAll();
@@ -53,12 +54,12 @@ public class PessoaServiceTest {
 	@Test
 	public void deve_retornar_nulo_quando_pessoa_nao_existir() {
 		//CENARIO
-		doReturn(Optional.of(PessoaBuilder.builder().nome("MARIA").get()))
+		doReturn(Optional.ofNullable(null))
 			.when(pessoaRepository)
 			.findById(1L);
 		
 		//ACAO
-		Pessoa resultado = pessoaService.getById(2L);
+		Pessoa resultado = pessoaService.getById(1);
 		
 		//VERIFICACAO
 		assertNull(resultado);
@@ -67,9 +68,11 @@ public class PessoaServiceTest {
 	@Test
 	public void dever_retornar_pessoa_quando_existir() {
 		//CENARIO
-		doReturn(Optional.of(PessoaBuilder.builder().id(1L).nome("JOAO").get()))
+		Pessoa pessoa = PessoaBuilder.builder().pessoaDefault().get();
+		
+		doReturn(Optional.of(pessoa))
 			.when(pessoaRepository)
-			.findById(1L);
+			.findById(pessoa.getId());
 		
 		//ACAO
 		Pessoa resultado = pessoaService.getById(1L);

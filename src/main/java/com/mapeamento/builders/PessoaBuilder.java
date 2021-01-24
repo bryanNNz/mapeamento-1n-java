@@ -31,6 +31,12 @@ public class PessoaBuilder {
 		return this;
 	}
 	
+	public PessoaBuilder pessoaDefault() {
+		this.pessoa.setId(1L);
+		this.pessoa.setNome("NOME DEFAULT");
+		return this;
+	}
+	
 	public Pessoa get() {
 		return this.pessoa;
 	}

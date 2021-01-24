@@ -40,9 +40,10 @@ public class PessoaControllerTest {
 	}
 	
 	@Test
-	public void deve_retornar_status_200_quando_existir_registro() throws Exception {
+	public void deve_retornar_status_200_quando_existir_registros() throws Exception {
 		//CENARIO
-		Pessoa pessoa = PessoaBuilder.builder().id(1L).nome("MARIA").get();
+		Pessoa pessoa = PessoaBuilder.builder().pessoaDefault().get();
+		
 		doReturn(Arrays.asList(pessoa))
 			.when(pessoaService).getAll();
 		
@@ -68,7 +69,8 @@ public class PessoaControllerTest {
 	@Test
 	public void deve_retornar_status_200_quando_existir_registro_por_id() throws Exception {
 		//CENARIO
-		Pessoa pessoa = PessoaBuilder.builder().id(1L).nome("MARIA").get();
+		Pessoa pessoa = PessoaBuilder.builder().pessoaDefault().get();
+		
 		doReturn(pessoa)
 			.when(pessoaService).getById(pessoa.getId());
 		
@@ -79,14 +81,13 @@ public class PessoaControllerTest {
 	}
 	
 	@Test
-	public void deve_retornar_status_404_quando_nao_existir_registro_por_id() throws Exception {
+	public void deve_retornar_status_204_quando_nao_existir_registro_por_id() throws Exception {
 		//CENARIO
-		Pessoa pessoa = PessoaBuilder.builder().id(1L).nome("JOAO").get();
-		doReturn(pessoa)
-			.when(pessoaService).getById(pessoa.getId());
+		doReturn(null)
+			.when(pessoaService).getById(2L);
 		
 		//ACAO/VERIFICACAO
 		mockMvc.perform(get("/pessoa/{id}", 2L))
-			.andExpect(status().isNotFound());
+			.andExpect(status().isNoContent());
 	}
 }
